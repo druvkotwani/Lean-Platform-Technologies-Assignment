@@ -21,7 +21,7 @@ const feedbackOptions = [
 
 
 const Fab = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const handleToggle = () => {
         console.log('handleToggle')
         setIsOpen((open) => !open)
@@ -46,25 +46,58 @@ export default Fab
 
 const OptionDiv = ({ handleToggle }) => {
     const [clicked, setClicked] = useState(false)
+    const [selectedOption, setSelectedOption] = useState('Option2');
+
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+    };
     return (
-
-        <div className={` bg-transparent   flex items-end ${!clicked ? 'flex-col gap-6 w-[256px] ' : 'flex-row'}  `}>
+        <div className='flex flex-col items-end'>
             {
-                feedbackOptions.map((option, index) => {
-                    return (
-                        <EachOptioin
-                            key={index}
-                            clicked={clicked}
-                            setClicked={setClicked}
-                            text={option.text}
-                            icon={option.icon}
-                        />
-                    )
-                })
-            }
+                clicked && (
+                    <div className='bg-white h-[536px] w-[430px] gap-[32px] rounded-lg flex flex-col items-start justify-'>
+                        <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
+                            <p className='px-4'>
+                                Let us know about the Issue
+                                <br />
+                                you are facing right now!
+                            </p>
+                        </header>
 
-            <CloseFab handleToggle={handleToggle} />
-        </div >
+                        <div className='w-full'>
+                            <div className='flex items-start flex-col justify-start px-4 '>
+                                <p className='text-lg font-poppins font-medium text-[#4D4D4D]'>Choose a section</p>
+                                <select value={selectedOption} onChange={handleOptionChange} className='bg-[#E0E0E0] w-full py-3 px-4 rounded-lg text-lg font-poppins font-medium border-[#CCCCCC] border  '>
+                                    <option value="">Concept Cards</option>
+                                    <option value="option1">Interview Questions</option>
+                                    <option value="option2">Practise Questions</option>
+                                    <option value="option3">Quizzes</option>
+                                </select>
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                )
+            }
+            <div className={` bg-transparent   flex items-end ${!clicked ? 'flex-col gap-6 w-[256px] ' : 'flex-row'}  `}>
+
+                {
+                    feedbackOptions.map((option, index) => {
+                        return (
+                            <EachOptioin
+                                key={index}
+                                clicked={clicked}
+                                setClicked={setClicked}
+                                text={option.text}
+                                icon={option.icon}
+                            />
+                        )
+                    })
+                }
+
+                <CloseFab handleToggle={handleToggle} />
+            </div >
+        </div>
 
     )
 }
