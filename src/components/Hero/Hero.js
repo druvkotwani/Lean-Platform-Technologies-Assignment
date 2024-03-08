@@ -1,3 +1,4 @@
+import Fab from "../FAB/Fab"
 
 const Hero = () => {
     return (
@@ -19,6 +20,8 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
+
+            <Fab />
         </div>
     )
 }
