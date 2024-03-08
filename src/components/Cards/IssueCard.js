@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = () => {
+const IssueCard = () => {
     return (
         <div className='bg-white h-[540px] w-[430px] gap-[32px] rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
@@ -50,4 +50,4 @@ const Card = () => {
     )
 }
 
-export default Card
+export default IssueCard

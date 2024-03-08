@@ -3,19 +3,23 @@ import React, { useState } from 'react'
 const feedbackOptions = [
     {
         text: 'Report an Issue',
-        icon: Flag
+        icon: <Flag />,
+        IconName: 'flag'
     },
     {
         text: 'Share Feedback',
-        icon: Thumbs
+        icon: <Thumbs />,
+        IconName: 'thumb'
     },
     {
         text: 'Give Suggestion',
-        icon: Suggestion
+        icon: <Suggestion />,
+        IconName: 'suggestion'
     },
     {
         text: 'Contact Us',
-        icon: ContactUS
+        icon: <ContactUS />,
+        IconName: 'contactus'
     }
 ]
 
@@ -102,7 +106,7 @@ const OptionDiv = ({ handleToggle }) => {
                     </div>
                 )
             }
-            <div className={` bg-transparent   flex items-end ${!clicked ? 'flex-col gap-6 w-[256px] ' : 'flex-row'}  `}>
+            <div className={` bg-transparent   flex items-end ${!clicked ? 'flex-col gap-6 w-[256px] ' : 'flex-row gap-2'}  `}>
 
                 {
                     feedbackOptions.map((option, index) => {
@@ -113,6 +117,7 @@ const OptionDiv = ({ handleToggle }) => {
                                 setClicked={setClicked}
                                 text={option.text}
                                 icon={option.icon}
+                                IconName={option.IconName}
                             />
                         )
                     })
@@ -125,19 +130,24 @@ const OptionDiv = ({ handleToggle }) => {
     )
 }
 
-const EachOptioin = ({ text, icon, clicked, setClicked }) => {
+const EachOptioin = ({ text, icon, IconName, clicked, setClicked }) => {
 
+    const [selectedIcon, setSelectedIcon] = useState('')
 
     const handleClicked = (e) => {
+
         setClicked(!clicked)
     }
+
     return (
-        <div onClick={handleClicked} key={text} className={`flex justify-center items-center font-poppins rounded-md `}>
+        <div onClick={() => setSelectedIcon(IconName)} key={text} className={`flex justify-center items-center font-poppins rounded-md`}>
             {
-                !clicked && <span cursor-pointer className='text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md cursor-pointer'>{text}</span>
+                !clicked && <span onClick={handleClicked} className='text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md cursor-pointer'>{text}</span>
             }
 
-            <span className='cursor-pointer'>{icon()}</span>
+            <span onClick={handleClicked} className={`${selectedIcon === IconName ? 'bg-red-200' : ''}     cursor-pointer `}>
+                {React.cloneElement(icon, { setSelectedIcon })} {/* Passing setSelectedIcon to the icon */}
+            </span>
         </div>
     )
 }
@@ -201,9 +211,9 @@ function CloseFab({ handleToggle }) {
 
 }
 
-function Flag() {
+function Flag({ setSelectedIcon }) {
     return (
-        <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => setSelectedIcon('flag')}>
             <g filter="url(#filter0_d_4479_3051)">
                 <rect x="7" y="7" width="60" height="60" rx="30" fill="#F8F8F8" />
                 <path d="M26.4536 38.002V50.002H28.1567H28.8599V45.6285V41.2504L29.2208 41.0723C31.4661 39.9801 34.0021 39.8676 36.2661 40.7676C36.5286 40.8707 37.1896 41.1848 37.7333 41.466C38.2817 41.7473 38.938 42.0613 39.2005 42.1645C41.4411 43.0551 43.8036 43.1254 46.0864 42.3707C46.5083 42.2301 47.0614 41.9957 47.6333 41.7051L48.5239 41.2598L48.538 34.0785L48.5474 26.8973L47.9755 27.2301C46.0208 28.3504 44.6567 28.7676 42.9224 28.7676C42.1255 28.7676 41.4646 28.6832 40.7239 28.4816C39.9599 28.2801 39.4864 28.0832 38.1646 27.4082C36.9317 26.7848 36.3692 26.5598 35.4505 26.3301C34.0255 25.9691 32.3942 25.9504 30.9364 26.2785C30.3974 26.4004 29.713 26.616 29.2302 26.8223L28.8599 26.977V26.4895V26.002H28.1567H26.4536V38.002Z" fill="#0F0F0F" />
@@ -234,9 +244,9 @@ function attach() {
     )
 }
 
-function Thumbs() {
+function Thumbs({ setSelectedIcon }) {
     return (
-        <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg onClick={() => setSelectedIcon('thumb')} width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_4479_3056)">
                 <rect x="7" y="7" width="60" height="60" rx="30" fill="#F8F8F8" />
                 <path d="M45.7269 52.7216C46.2761 52.5772 46.4627 52.1301 46.519 50.7994C46.5437 50.303 46.5718 50.0073 46.6246 49.796C46.7197 49.4053 47.0154 48.8068 47.3182 48.4054C47.7406 47.8421 48.5715 47.0747 49.2192 46.6452L49.3706 46.5466V41.8925V37.2348L48.9798 37.0693C47.9378 36.6293 46.5824 36.2737 45.1636 36.0695C44.118 35.9181 43.4421 35.8794 41.8544 35.8759C40.3828 35.8724 40.3335 35.8759 40.0659 35.9533C39.0274 36.2526 38.267 36.9778 37.9677 37.9495C37.9255 38.0833 37.6896 39.3436 37.4432 40.7483C37.0172 43.1951 36.9996 43.3218 36.9996 43.7759C37.0031 44.1878 37.0172 44.2935 37.0982 44.5681C37.3728 45.4764 38.01 46.184 38.8655 46.5255C39.3618 46.7261 39.4745 46.7332 41.5903 46.7332H43.5195L43.3963 47.0782C43.1112 47.8773 42.9844 48.6554 42.9844 49.62C42.9844 50.3664 43.0232 50.6163 43.1992 51.0564C43.3541 51.4472 43.5231 51.7006 43.8399 52.014C44.1532 52.3273 44.4454 52.5104 44.8538 52.6512C45.0756 52.7286 45.5579 52.7674 45.7269 52.7216Z" fill="#0F0F0F" />
@@ -262,9 +272,9 @@ function Thumbs() {
     )
 }
 
-function Suggestion() {
+function Suggestion({ setSelectedIcon }) {
     return (
-        <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg onClick={() => setSelectedIcon('suggestion')} width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_4479_3075)">
                 <rect x="7" y="7" width="60" height="60" rx="30" fill="#F8F8F8" />
                 <path d="M24 27V30.5756H43.6658V27H24ZM24 34.1512V37.7268H43.6658V34.1512H24ZM54.3926 34.33C54.2138 34.33 53.8562 34.5088 53.6775 34.6875L51.8897 36.4753L55.644 40.2297L57.4318 38.4419C57.7894 38.0843 57.7894 37.3692 57.4318 37.0117L55.1077 34.6875C54.9289 34.5088 54.7501 34.33 54.3926 34.33ZM50.9958 37.548L40.0902 48.2748V52.0292H43.8446L54.7501 41.1236L50.9958 37.548ZM24 41.3024V44.878H36.5146V41.3024H24Z" fill="#0F0F0F" />
@@ -287,9 +297,9 @@ function Suggestion() {
     )
 }
 
-function ContactUS() {
+function ContactUS({ setSelectedIcon }) {
     return (
-        <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg onClick={() => setSelectedIcon('contactus')} width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_4479_3080)">
                 <rect x="7" y="7" width="60" height="60" rx="30" fill="#F8F8F8" />
                 <g clip-path="url(#clip0_4479_3080)">
