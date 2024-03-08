@@ -1,49 +1,94 @@
 import React, { useState } from 'react'
 
+const feedbackOptions = [
+    {
+        text: 'Report an Issue',
+        icon: Flag
+    },
+    {
+        text: 'Share Feedback',
+        icon: Thumbs
+    },
+    {
+        text: 'Give Suggestion',
+        icon: Suggestion
+    },
+    {
+        text: 'Contact Us',
+        icon: ContactUS
+    }
+]
+
+
 const Fab = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+    const handleToggle = () => {
+        console.log('handleToggle')
+        setIsOpen((open) => !open)
+    }
+
     return (
-        <div>
-            <div className='transform transition-transform duration-300 bottom-[32px] right-[32px] fixed '>
-                <span onClick={() => setIsOpen((open) => !open)}>
-                    {isOpen ? options() : fab()}
-                </span>
-            </div>
+
+        <div className='bottom-[32px] right-[32px] fixed '>
+
+            {isOpen ?
+                <OptionDiv handleToggle={handleToggle} />
+                :
+                <OpenFab handleToggle={handleToggle} />
+            }
+
         </div>
+
     )
 }
 
 export default Fab
 
-const options = () => {
+const OptionDiv = ({ handleToggle }) => {
+    const [clicked, setClicked] = useState(false)
     return (
-        <div className='flex items-end flex-col transform transition-transform duration-300'>
-            <div className='w-[256px]  bg-transparent   flex items-end flex-col gap-6 '>
-                <div className='flex justify-center items-center font-poppins rounded-md'>
-                    <span className='text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md'>Report an Issue</span>
-                    {flag()}
-                </div>
-                <div className='flex justify-center items-center font-poppins rounded-md'>
-                    <span className='text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md'>Share Feedback</span>
-                    {thumbs()}
-                </div>
-                <div className='flex justify-center items-center font-poppins rounded-md'>
-                    <span className='text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md'>Give Suggestion</span>
-                    {suggestion()}
-                </div>
-                <div className='flex justify-center items-center font-poppins rounded-md'>
-                    <span className='text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md'>Contact Us</span>
-                    {contactUS()}
-                </div>
-            </div >
-            <div className='mt-4'>{closeFab()}</div>
+
+        <div className={` bg-transparent   flex items-end ${!clicked ? 'flex-col gap-6 w-[256px] ' : 'flex-row'}  `}>
+            {
+                feedbackOptions.map((option, index) => {
+                    return (
+                        <EachOptioin
+                            key={index}
+                            clicked={clicked}
+                            setClicked={setClicked}
+                            text={option.text}
+                            icon={option.icon}
+                        />
+                    )
+                })
+            }
+
+            <CloseFab handleToggle={handleToggle} />
+        </div >
+
+    )
+}
+
+const EachOptioin = ({ text, icon, clicked, setClicked }) => {
+
+
+    const handleClicked = (e) => {
+        setClicked(!clicked)
+    }
+    return (
+        <div onClick={handleClicked} key={text} className={`flex justify-center items-center font-poppins rounded-md `}>
+            {
+                !clicked && <span cursor-pointer className='text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md cursor-pointer'>{text}</span>
+            }
+
+            <span className='cursor-pointer'>{icon()}</span>
         </div>
     )
 }
 
-function fab() {
+function OpenFab({ handleToggle }) {
     return (
-        <svg width="76" height="76" viewBox="0 0 76 76" fill="none" className='cursor-pointer ' xmlns="http://www.w3.org/2000/svg">
+        <svg onClick={handleToggle} width="76" height="76" viewBox="0 0 76 76" fill="none" className='cursor-pointer ' xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_1_4860)">
                 <rect x="7" y="7" width="60" height="60" rx="30" fill="#F8F8F8" />
                 <g clip-path="url(#clip0_1_4860)">
@@ -76,9 +121,9 @@ function fab() {
     )
 }
 
-function closeFab() {
+function CloseFab({ handleToggle }) {
     return (
-        <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg onClick={handleToggle} className='cursor-pointer' width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_1_4939)">
                 <rect x="7" y="7" width="60" height="60" rx="30" fill="#F8F8F8" />
                 <path d="M27 27.0012L47 47.0006M27 47.0006L47 27.0012" stroke="#0F0F0F" stroke-width="3.99994" stroke-linecap="round" stroke-linejoin="round" />
@@ -100,7 +145,7 @@ function closeFab() {
 
 }
 
-function flag() {
+function Flag() {
     return (
         <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_4479_3051)">
@@ -124,7 +169,7 @@ function flag() {
     )
 }
 
-function thumbs() {
+function Thumbs() {
     return (
         <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_4479_3056)">
@@ -152,7 +197,7 @@ function thumbs() {
     )
 }
 
-function suggestion() {
+function Suggestion() {
     return (
         <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_4479_3075)">
@@ -177,7 +222,7 @@ function suggestion() {
     )
 }
 
-function contactUS() {
+function ContactUS() {
     return (
         <svg width="76" height="76" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d_4479_3080)">
