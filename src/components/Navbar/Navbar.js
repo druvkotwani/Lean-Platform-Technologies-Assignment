@@ -37,7 +37,7 @@ export default Navbar
 function downSvg() {
     return (
         <svg width="20" height="13" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.36975 2L10.0336 10L18 2" stroke="#FEFEFE" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round" />
+            <path d="M2.36975 2L10.0336 10L18 2" stroke="#FEFEFE" strokeOpacity="0.5" strokeWidth="4" strokeLinecap="round" />
         </svg>
 
 
