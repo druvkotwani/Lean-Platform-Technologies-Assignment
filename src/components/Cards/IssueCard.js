@@ -47,7 +47,7 @@ const IssueCard = ({ handleSubmit }) => {
                 </div>
 
 
-                <button onClick={() => handleSubmit('Thanks for bringing the issue to our attention', `We'll review it shortly and provide an update soon!`)} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+                <button onClick={() => handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
             </div>
 
         </div>
