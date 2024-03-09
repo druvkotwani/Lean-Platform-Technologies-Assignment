@@ -3,6 +3,7 @@ import ContactCard from '../Cards/ContactCard';
 import SuggestionCard from '../Cards/SuggestionCard';
 import FeedbackCard from '../Cards/FeedbackCard';
 import IssueCard from '../Cards/IssueCard';
+import Thanks from '../Thanks/Thanks';
 
 const feedbackOptions = [
     {
@@ -41,7 +42,10 @@ const Fab = () => {
             {isOpen ?
                 <OptionDiv handleToggle={handleToggle} />
                 :
-                <OpenFab handleToggle={handleToggle} />
+                <div className='flex flex-col items-end'>
+                    <Thanks />
+                    <OpenFab handleToggle={handleToggle} />
+                </div>
             }
 
         </div>
