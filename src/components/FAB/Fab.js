@@ -52,13 +52,9 @@ const Fab = () => {
 export default Fab
 
 const OptionDiv = ({ handleToggle }) => {
-    const [clicked, setClicked] = useState(false)
     const [selectedIcon, setSelectedIcon] = useState('')
 
 
-    const handleClicked = (e) => {
-        setClicked(!clicked)
-    }
 
 
     return (
@@ -82,14 +78,11 @@ const OptionDiv = ({ handleToggle }) => {
                         return (
                             <EachOptioin
                                 key={index}
-                                clicked={clicked}
-                                setClicked={setClicked}
                                 text={option.text}
                                 icon={option.icon}
                                 IconName={option.IconName}
                                 selectedIcon={selectedIcon}
                                 setSelectedIcon={setSelectedIcon}
-                                handleClicked={handleClicked}
                             />
                         )
                     })
@@ -102,7 +95,7 @@ const OptionDiv = ({ handleToggle }) => {
     )
 }
 
-const EachOptioin = ({ text, icon, IconName, clicked, setClicked, selectedIcon, setSelectedIcon, handleClicked }) => {
+const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) => {
 
 
     return (
