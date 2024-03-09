@@ -76,10 +76,10 @@ const Fab = () => {
             </div>
 
             {/* Mobile */}
-            <div className={`${isOpen && selectedIcon.length > 0 ? 'bottom-0 mt-4  fixed right-0' : 'bottom-[32px] right-[32px] '} fixed w-full sm:hidden `}>
+            <div className={`${isOpen && selectedIcon.length > 0 ? 'bottom-0 mt-4  fixed right-0' : 'bottom-[24px] right-[24px] '} fixed w-full sm:hidden `}>
                 {isOpen ?
                     <div className='modal-overlay'>
-                        <div className={`${isOpen & selectedIcon.length > 0 ? 'bottom-0 fixed right-0' : 'bottom-[32px] right-[32px] fixed '} z-20 w-full `}>
+                        <div className={`${isOpen & selectedIcon.length > 0 ? 'bottom-0 fixed right-0' : 'bottom-[24px] right-[24px] fixed '} z-20 w-full `}>
                             <OptionDiv selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
                         </div>
                     </div>
