@@ -2,7 +2,7 @@ import React from 'react'
 
 const IssueCard = () => {
     return (
-        <div className='bg-white h-[540px] w-[430px] gap-[32px] rounded-lg flex flex-col items-start '>
+        <div className='bg-white  w-[430px] gap-[32px] rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <p className='px-4'>
                     Let us know about the Issue
@@ -43,7 +43,7 @@ const IssueCard = () => {
                 </div>
 
 
-                <button className='bg-[#0F0F0F] ml-auto mx-4 px-5 py-[10px] opacity-[60%] rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4'>Submit</button>
+                <button className='bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] opacity-[60%] rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4'>Submit</button>
             </div>
 
         </div>
