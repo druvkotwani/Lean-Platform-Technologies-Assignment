@@ -9,12 +9,12 @@ const Hero = () => {
             </div>
 
             <div className="top-[250px] left-[304px] fixed flex flex-col gap-5">
-                <div className="w-[832px] h-[351px] bg-white rounded-md">
+                <div className="w-[832px] h-[351px] bg-gray-500 rounded-md">
                     <div>
 
                     </div>
                 </div>
-                <div className="w-[832px] h-[351px] bg-white rounded-md">
+                <div className="w-[832px] h-[351px] bg-gray-600 rounded-md">
                     <div>
 
                     </div>
