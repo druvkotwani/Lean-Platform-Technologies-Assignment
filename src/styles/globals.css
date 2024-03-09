@@ -42,7 +42,7 @@ body {
   border-color: rgba(255, 255, 255, 0);
   border-top-color: #fff;
   border-width: 10px;
-  margin-left: calc(42%);
+  margin-left: calc(40%);
 }
 
 @media (max-width: 634px) {

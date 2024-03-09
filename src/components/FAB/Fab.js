@@ -55,11 +55,11 @@ const Fab = () => {
 
     return (
 
-        <div className='bottom-[32px] right-[32px] fixed '>
+        <div className='bottom-[32px] right-[32px] fixed w-full '>
 
             {isOpen ?
                 <div className='modal-overlay'>
-                    <div className='bottom-[32px] right-[32px] fixed z-20'>
+                    <div className='bottom-[32px] right-[32px] fixed z-20 w-full'>
                         <OptionDiv handleSubmit={handleSubmit} handleToggle={handleToggle} />
                     </div>
                 </div>
@@ -90,11 +90,8 @@ export default Fab
 const OptionDiv = ({ handleToggle, handleSubmit }) => {
     const [selectedIcon, setSelectedIcon] = useState('')
 
-
-
-
     return (
-        <div className='flex flex-col items-end z-20'>
+        <div className='flex flex-col items-end z-20 w-full'>
             {
                 selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
             }
