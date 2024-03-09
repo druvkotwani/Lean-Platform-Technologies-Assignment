@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const SuggestionCard = () => {
+const SuggestionCard = ({ handleSubmit }) => {
     const [message, setMessages] = useState('')
     let isMessageEmpty = message.trim() === ''
     return (
@@ -46,7 +46,7 @@ const SuggestionCard = () => {
                 </div>
 
 
-                <button disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+                <button onClick={handleSubmit} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
             </div>
 
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ContactCard from '../Cards/ContactCard';
 import SuggestionCard from '../Cards/SuggestionCard';
 import FeedbackCard from '../Cards/FeedbackCard';
@@ -31,19 +31,36 @@ const feedbackOptions = [
 
 const Fab = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [submit, setSubmit] = useState(true)
+
     const handleToggle = () => {
         setIsOpen((open) => !open)
     }
+    const handleSubmit = (text) => {
+        console.log(text)
+        handleToggle()
+        setSubmit((submit) => !submit)
+    }
+
+    useEffect(() => {
+        if (submit) {
+            setTimeout(() => {
+                setSubmit(false);
+            }, 3000);
+        }
+    }, [submit])
 
     return (
 
         <div className='bottom-[32px] right-[32px] fixed '>
 
             {isOpen ?
-                <OptionDiv handleToggle={handleToggle} />
+                <OptionDiv handleSubmit={handleSubmit} handleToggle={handleToggle} />
                 :
                 <div className='flex flex-col items-end'>
-                    <Thanks text1='Thanks for bringing the issue to our attention.' />
+                    {
+                        submit && <Thanks text1='Thanks for bringing the issue to our attention.' />
+                    }
                     <OpenFab handleToggle={handleToggle} />
                 </div>
             }
@@ -55,7 +72,7 @@ const Fab = () => {
 
 export default Fab
 
-const OptionDiv = ({ handleToggle }) => {
+const OptionDiv = ({ handleToggle, handleSubmit }) => {
     const [selectedIcon, setSelectedIcon] = useState('')
 
 
@@ -64,16 +81,16 @@ const OptionDiv = ({ handleToggle }) => {
     return (
         <div className='flex flex-col items-end'>
             {
-                selectedIcon === 'flag' && <IssueCard />
+                selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
             }
             {
-                selectedIcon === 'thumb' && <FeedbackCard />
+                selectedIcon === 'thumb' && <FeedbackCard handleSubmit={handleSubmit} />
             }
             {
-                selectedIcon === 'suggestion' && <SuggestionCard />
+                selectedIcon === 'suggestion' && <SuggestionCard handleSubmit={handleSubmit} />
             }
             {
-                selectedIcon === 'contactus' && <ContactCard />
+                selectedIcon === 'contactus' && <ContactCard handleSubmit={handleSubmit} />
             }
             <div className={` bg-transparent   flex items-end ${!selectedIcon ? 'flex-col gap-6 w-[256px] ' : 'flex-row gap-2'}  `}>
 

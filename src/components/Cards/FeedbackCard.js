@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const FeedbackCard = () => {
+const FeedbackCard = ({ handleSubmit }) => {
     const [messages, setMessages] = useState('')
     let isMessageEmpty = messages.trim() === ''
 
@@ -33,7 +33,7 @@ const FeedbackCard = () => {
                     Send feedback anonymously
                 </div>
 
-                <button disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+                <button onClick={handleSubmit} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
             </div>
 
         </div>
