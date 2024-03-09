@@ -4,7 +4,7 @@ const SuggestionCard = ({ handleSubmit }) => {
     const [message, setMessages] = useState('')
     let isMessageEmpty = message.trim() === ''
     return (
-        <div className='bg-white  w-[430px] gap-[32px] rounded-lg flex flex-col items-start '>
+        <div className='bg-white w-full  lg:w-[430px] gap-[32px] rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <p className='px-4 text-center'>
                     Share your <span className='text-black'>Suggestions</span> with us

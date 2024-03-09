@@ -34,6 +34,8 @@ const Fab = () => {
     const [text1, setText1] = useState('')
     const [text2, setText2] = useState('')
 
+    const [selectedIcon, setSelectedIcon] = useState('')
+
 
     const handleToggle = () => {
         setIsOpen((open) => !open)
@@ -55,40 +57,47 @@ const Fab = () => {
 
     return (
 
-        <div className='bottom-[32px] right-[32px] fixed w-full '>
+        <>
+            {/* Desktop */}
+            <div className='bottom-[32px] right-[32px] fixed w-full hidden sm:block'>
+                {isOpen ?
+                    <OptionDiv selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
+                    :
+                    (<div className=' flex-col items-end hidden sm:flex'>
+                        {
+                            submit && <Thanks text1={text1} text2={text2} />
+                        }
+                        <OpenFab handleToggle={handleToggle} />
+                    </div>)
+                }
+            </div>
 
-            {isOpen ?
-                <div className='modal-overlay'>
-                    <div className='bottom-[32px] right-[32px] fixed z-20 w-full'>
-                        <OptionDiv handleSubmit={handleSubmit} handleToggle={handleToggle} />
+            {/* Mobile */}
+            <div className={`${isOpen && selectedIcon ? '' : 'bottom-[32px] right-[32px]'} fixed w-full sm:hidden `}>
+                {isOpen ?
+                    <div className='modal-overlay'>
+                        <div className={`${isOpen && selectedIcon ? '' : 'bottom-[32px] right-[32px]'}z-20 w-full`}>
+                            <OptionDiv selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
+                        </div>
                     </div>
-                </div>
-                :
-                <div className='flex flex-col items-end'>
-                    {
-                        submit && <Thanks text1={text1} text2={text2} />
-                    }
-                    <div>
-                        <span className='hidden sm:block'>
-                            <OpenFab handleToggle={handleToggle} />
-                        </span>
-                        <span className='sm:hidden '>
-
-                            <MobileFab handleToggle={handleToggle} />
-                        </span>
+                    :
+                    <div className='flex flex-col items-end sm:hidden'>
+                        {
+                            submit && <Thanks text1={text1} text2={text2} />
+                        }
+                        <MobileFab handleToggle={handleToggle} />
                     </div>
-                </div>
-            }
+                }
+            </div>
 
-        </div>
+        </>
 
     )
 }
 
 export default Fab
 
-const OptionDiv = ({ handleToggle, handleSubmit }) => {
-    const [selectedIcon, setSelectedIcon] = useState('')
+const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon }) => {
 
     return (
         <div className='flex flex-col items-end z-20 w-full'>
