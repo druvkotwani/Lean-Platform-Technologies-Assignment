@@ -37,13 +37,16 @@ const Fab = () => {
     const [selectedIcon, setSelectedIcon] = useState('')
 
 
+
     const handleToggle = () => {
-        setIsOpen((open) => !open)
+        setSelectedIcon('')
+        setIsOpen((isOpen) => !isOpen)
     }
     const handleSubmit = (one, two) => {
         setText1(one)
         setText2(two)
         handleToggle()
+        setSelectedIcon('')
         setSubmit((submit) => !submit)
     }
 
@@ -73,10 +76,10 @@ const Fab = () => {
             </div>
 
             {/* Mobile */}
-            <div className={`${isOpen && selectedIcon ? '' : 'bottom-[32px] right-[32px]'} fixed w-full sm:hidden `}>
+            <div className={`${isOpen && selectedIcon.length > 0 ? 'bottom-0 mt-4  fixed right-0' : 'bottom-[32px] right-[32px] '} fixed w-full sm:hidden `}>
                 {isOpen ?
                     <div className='modal-overlay'>
-                        <div className={`${isOpen && selectedIcon ? '' : 'bottom-[32px] right-[32px]'}z-20 w-full`}>
+                        <div className={`${isOpen & selectedIcon.length > 0 ? 'bottom-0 fixed right-0' : 'bottom-[32px] right-[32px] fixed '} z-20 w-full `}>
                             <OptionDiv selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
                         </div>
                     </div>
@@ -88,7 +91,7 @@ const Fab = () => {
                         <MobileFab handleToggle={handleToggle} />
                     </div>
                 }
-            </div>
+            </div >
 
         </>
 
@@ -100,20 +103,24 @@ export default Fab
 const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon }) => {
 
     return (
-        <div className='flex flex-col items-end z-20 w-full'>
-            {
-                selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
-            }
-            {
-                selectedIcon === 'thumb' && <FeedbackCard handleSubmit={handleSubmit} />
-            }
-            {
-                selectedIcon === 'suggestion' && <SuggestionCard handleSubmit={handleSubmit} />
-            }
-            {
-                selectedIcon === 'contactus' && <ContactCard handleSubmit={handleSubmit} />
-            }
-            <div className={` bg-transparent   flex items-end ${!selectedIcon ? 'flex-col gap-2 sm:gap-6 w-[256px] ' : 'flex-row gap-2'}  `}>
+        <div className='flex flex-col items-end z-20 w-full  '>
+            {/* Desktop */}
+            <div className='hidden sm:block'>
+                {
+                    selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
+                }
+                {
+                    selectedIcon === 'thumb' && <FeedbackCard handleSubmit={handleSubmit} />
+                }
+                {
+                    selectedIcon === 'suggestion' && <SuggestionCard handleSubmit={handleSubmit} />
+                }
+                {
+                    selectedIcon === 'contactus' && <ContactCard handleSubmit={handleSubmit} />
+                }
+            </div>
+
+            <div className={` bg-transparent flex items-end justify-center  ${!selectedIcon ? 'flex-col gap-2 sm:gap-6 w-[256px] ' : 'flex-row gap-2 mx-auto sm:mx-0'}  `}>
 
                 {
                     feedbackOptions.map((option, index) => {
@@ -132,6 +139,21 @@ const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon }
 
                 <CloseFab handleToggle={handleToggle} />
             </div >
+            {/* Mobile */}
+            <div className='sm:hidden w-full mt-2'>
+                {
+                    selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
+                }
+                {
+                    selectedIcon === 'thumb' && <FeedbackCard handleSubmit={handleSubmit} />
+                }
+                {
+                    selectedIcon === 'suggestion' && <SuggestionCard handleSubmit={handleSubmit} />
+                }
+                {
+                    selectedIcon === 'contactus' && <ContactCard handleSubmit={handleSubmit} />
+                }
+            </div>
         </div>
 
     )
@@ -141,14 +163,12 @@ const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) =
 
 
     return (
-        <div onClick={() => {
-            setSelectedIcon(IconName)
-        }} key={text} className={`flex justify-center items-center font-poppins rounded-md`}>
+        <div onClick={() => { setSelectedIcon(IconName) }} key={text} className={`flex justify-center items-center font-poppins rounded-md `}>
             {
                 !selectedIcon && <span className='mr-2 text-black text-[18px]  font-medium px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-md cursor-pointer'>{text}</span>
             }
 
-            <span className={`${selectedIcon === IconName ? 'shadow-[1px_1px_8px_0px_#808080] p-1 border-4 border-[#808080] rounded-full mt-2' : 'm-1'}     cursor-pointer `}>
+            <span className={`${selectedIcon === IconName ? 'shadow-[1px_1px_8px_0px_#808080] p-[2px] border-2 border-[#808080] rounded-full mt-2' : 'm-1'}     cursor-pointer `}>
                 {React.cloneElement(icon, { setSelectedIcon })}
             </span>
         </div>
@@ -159,13 +179,13 @@ function OpenFab({ handleToggle }) {
     return (
         <div onClick={handleToggle} className='w-12 h-12 mr-1 cursor-pointer sm:w-14 sm:h-14 rounded-full  bg-white flex items-center justify-center '>
             <svg className='ml-2' width="32" height="34" viewBox="0 0 32 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_4645_6127)">
+                <g clipPath="url(#clip0_4645_6127)">
                     <path d="M19.7452 0H2.32296C1.04002 0 0 1.04002 0 2.32296V27.8755C0 29.1584 1.04002 30.1984 2.32296 30.1984H19.7452C21.0281 30.1984 22.0682 29.1584 22.0682 27.8755V2.32296C22.0682 1.04002 21.0281 0 19.7452 0Z" fill="#0F0F0F" />
-                    <path d="M3.48438 6.96924L17.4222 6.96924" stroke="#F8F8F8" stroke-width="1.74222" stroke-linecap="round" />
-                    <path d="M3.48438 11.6147L17.4222 11.6147" stroke="#F8F8F8" stroke-width="1.74222" stroke-linecap="round" />
-                    <path d="M3.48438 16.2607L17.4222 16.2607" stroke="#F8F8F8" stroke-width="1.74222" stroke-linecap="round" />
-                    <path d="M3.48438 20.9067H10.4533" stroke="#F8F8F8" stroke-width="1.74222" stroke-linecap="round" />
-                    <path d="M25.2995 13.6118L16.5793 28.7155L16.9482 33.0538C17.0167 33.8594 17.8669 34.3503 18.5989 34.0068L22.5404 32.1571L31.2606 17.0535C31.902 15.9424 31.5214 14.5217 30.4103 13.8803L28.4727 12.7616C27.3616 12.1201 25.9409 12.5008 25.2995 13.6118Z" fill="#0F0F0F" stroke="#F8F8F8" stroke-width="1.16148" stroke-linecap="round" />
+                    <path d="M3.48438 6.96924L17.4222 6.96924" stroke="#F8F8F8" strokeWidth="1.74222" strokeLinecap="round" />
+                    <path d="M3.48438 11.6147L17.4222 11.6147" stroke="#F8F8F8" strokeWidth="1.74222" strokeLinecap="round" />
+                    <path d="M3.48438 16.2607L17.4222 16.2607" stroke="#F8F8F8" strokeWidth="1.74222" strokeLinecap="round" />
+                    <path d="M3.48438 20.9067H10.4533" stroke="#F8F8F8" strokeWidth="1.74222" strokeLinecap="round" />
+                    <path d="M25.2995 13.6118L16.5793 28.7155L16.9482 33.0538C17.0167 33.8594 17.8669 34.3503 18.5989 34.0068L22.5404 32.1571L31.2606 17.0535C31.902 15.9424 31.5214 14.5217 30.4103 13.8803L28.4727 12.7616C27.3616 12.1201 25.9409 12.5008 25.2995 13.6118Z" fill="#0F0F0F" stroke="#F8F8F8" strokeWidth="1.16148" strokeLinecap="round" />
                 </g>
                 <defs>
                     <clipPath id="clip0_4645_6127">
@@ -200,9 +220,9 @@ function MobileFab({ handleToggle }) {
 
 function CloseFab({ handleToggle }) {
     return (
-        <div onClick={handleToggle} className='w-12 h-12 mr-1 sm:w-14 sm:h-14 rounded-full cursor-pointer   bg-white flex items-center justify-center'>
+        <div onClick={handleToggle} className='w-12 h-12 mr-1 sm:w-14 mb-1 sm:h-14 rounded-full cursor-pointer   bg-white flex items-center justify-center'>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 2.00122L22 22.0006M2 22.0006L22 2.00122" stroke="#0F0F0F" stroke-width="3.99994" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M2 2.00122L22 22.0006M2 22.0006L22 2.00122" stroke="#0F0F0F" strokeWidth="3.99994" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
 
 
@@ -225,12 +245,11 @@ function Flag({ setSelectedIcon }) {
     )
 }
 
-
 function Thumbs({ setSelectedIcon }) {
     return (
         <div onClick={() => setSelectedIcon('thumb')} className='w-12 h-12 cursor-pointer sm:w-14 sm:h-14  rounded-full  bg-white flex items-center justify-center'>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_4645_2445)">
+                <g clipPath="url(#clip0_4645_2445)">
                     <path d="M23.5638 29.6247C24.0398 29.4996 24.2015 29.1121 24.2503 27.9588C24.2717 27.5286 24.2961 27.2723 24.3418 27.0892C24.4242 26.7505 24.6805 26.2318 24.9429 25.884C25.309 25.3958 26.0291 24.7307 26.5905 24.3584L26.7217 24.273V20.2394V16.2028L26.383 16.0594C25.4799 15.678 24.3052 15.3698 23.0756 15.1929C22.1694 15.0617 21.5836 15.0281 20.2076 15.0251C18.9322 15.022 18.8895 15.0251 18.6576 15.0922C17.7576 15.3515 17.0985 15.9801 16.8392 16.8222C16.8026 16.9381 16.5982 18.0304 16.3846 19.2478C16.0154 21.3683 16.0001 21.4782 16.0001 21.8718C16.0032 22.2288 16.0154 22.3203 16.0856 22.5583C16.3236 23.3455 16.8758 23.9587 17.6172 24.2547C18.0474 24.4286 18.1451 24.4347 19.9788 24.4347H21.6508L21.544 24.7337C21.2968 25.4263 21.187 26.1006 21.187 26.9366C21.187 27.5835 21.2206 27.8001 21.3731 28.1815C21.5074 28.5202 21.6538 28.7398 21.9284 29.0114C22.2 29.2829 22.4532 29.4416 22.8071 29.5636C22.9993 29.6308 23.4173 29.6643 23.5638 29.6247Z" fill="#0F0F0F" />
                     <path d="M30.8134 24.8744C31.146 24.7738 31.4389 24.4747 31.5426 24.13C31.6036 23.9347 31.6036 23.8554 31.5975 19.9804L31.5884 16.0292L31.4877 15.8248C31.3656 15.5746 31.1246 15.3458 30.8775 15.2451C30.7066 15.1749 30.6822 15.1749 29.6509 15.1749C28.6197 15.1749 28.5952 15.1749 28.4244 15.2451C28.1772 15.3458 27.9362 15.5746 27.8142 15.8248L27.7135 16.0292L27.7043 19.9804C27.6982 23.8554 27.6982 23.9347 27.7592 24.13C27.866 24.4839 28.1559 24.7738 28.5007 24.8775C28.7203 24.9416 30.6029 24.9416 30.8134 24.8744Z" fill="#0F0F0F" />
                     <path d="M8.43522 2.3746C7.95925 2.49969 7.79755 2.88718 7.74873 4.04051C7.72737 4.47072 7.70296 4.72701 7.6572 4.91008C7.57482 5.24875 7.31852 5.76744 7.05613 6.11527C6.69 6.60345 5.96994 7.26859 5.40854 7.64083L5.27734 7.72626V11.7598V15.7965L5.61602 15.9399C6.51914 16.3213 7.69381 16.6294 8.9234 16.8064C9.82957 16.9376 10.4154 16.9712 11.7914 16.9742C13.0668 16.9773 13.1095 16.9742 13.3414 16.9071C14.2415 16.6477 14.9005 16.0192 15.1598 15.1771C15.1964 15.0612 15.4009 13.9689 15.6144 12.7515C15.9836 10.6309 15.9989 10.5211 15.9989 10.1275C15.9958 9.77051 15.9836 9.67898 15.9135 9.44099C15.6755 8.6538 15.1232 8.04053 14.3818 7.74457C13.9516 7.57065 13.854 7.56455 12.0203 7.56455H10.3483L10.455 7.26554C10.7022 6.57294 10.812 5.89864 10.812 5.06263C10.812 4.4158 10.7785 4.19917 10.6259 3.81778C10.4917 3.4791 10.3452 3.25942 10.0706 2.98787C9.79906 2.71632 9.54582 2.55766 9.1919 2.43562C8.99968 2.36849 8.58168 2.33493 8.43522 2.3746Z" fill="#0F0F0F" />
