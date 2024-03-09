@@ -37,7 +37,7 @@ const ContactCard = ({ handleSubmit }) => {
 
                 </div>
 
-                <button onClick={handleSubmit} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${message.length > 0 ? '' : 'opacity-[60%]'} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+                <button onClick={() => handleSubmit('Thanks for reaching out to us! ', `We will get back to you as soon as possible`)} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${message.length > 0 ? '' : 'opacity-[60%]'} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
 
             </div>
 

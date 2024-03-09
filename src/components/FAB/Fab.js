@@ -32,12 +32,16 @@ const feedbackOptions = [
 const Fab = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [submit, setSubmit] = useState(true)
+    const [text1, setText1] = useState('')
+    const [text2, setText2] = useState('')
+
 
     const handleToggle = () => {
         setIsOpen((open) => !open)
     }
-    const handleSubmit = (text) => {
-        console.log(text)
+    const handleSubmit = (one, two) => {
+        setText1(one)
+        setText2(two)
         handleToggle()
         setSubmit((submit) => !submit)
     }
@@ -59,7 +63,7 @@ const Fab = () => {
                 :
                 <div className='flex flex-col items-end'>
                     {
-                        submit && <Thanks text1='Thanks for bringing the issue to our attention.' />
+                        submit && <Thanks text1={text1} text2={text2} />
                     }
                     <OpenFab handleToggle={handleToggle} />
                 </div>
@@ -124,7 +128,7 @@ const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) =
             setSelectedIcon(IconName)
         }} key={text} className={`flex justify-center items-center font-poppins rounded-md`}>
             {
-                !selectedIcon && <span className='mr-2 text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md cursor-pointer'>{text}</span>
+                !selectedIcon && <span className='mr-2 text-black text-[18px]  font-medium px-4 py-2 bg-white rounded-md cursor-pointer'>{text}</span>
             }
 
             <span className={`${selectedIcon === IconName ? 'shadow-[1px_1px_8px_0px_#808080] p-1 border-4 border-[#808080] rounded-full mt-2' : 'm-1'}     cursor-pointer `}>
