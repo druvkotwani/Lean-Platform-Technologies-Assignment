@@ -31,7 +31,7 @@ const feedbackOptions = [
 
 const Fab = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [submit, setSubmit] = useState(true)
+    const [submit, setSubmit] = useState(false)
     const [text1, setText1] = useState('')
     const [text2, setText2] = useState('')
 
