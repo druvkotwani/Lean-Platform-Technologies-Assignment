@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ContactCard from '../Cards/ContactCard';
 import SuggestionCard from '../Cards/SuggestionCard';
+import FeedbackCard from '../Cards/FeedbackCard';
 
 const feedbackOptions = [
     {
@@ -61,7 +62,7 @@ const OptionDiv = ({ handleToggle }) => {
         <div className='flex flex-col items-end'>
             {
                 clicked && (
-                    <SuggestionCard />
+                    <FeedbackCard />
                 )
             }
             <div className={` bg-transparent   flex items-end ${!clicked ? 'flex-col gap-6 w-[256px] ' : 'flex-row gap-2'}  `}>
@@ -91,7 +92,7 @@ const OptionDiv = ({ handleToggle }) => {
 const EachOptioin = ({ text, icon, IconName, clicked, setClicked }) => {
 
     const [selectedIcon, setSelectedIcon] = useState('')
-    const [layoutOpen, setLayoutOpen] = useState(false)
+
 
     const handleClicked = (e) => {
         setClicked(!clicked)

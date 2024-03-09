@@ -25,7 +25,10 @@ const FeedbackCard = () => {
                     </button>
 
                 </div>
-
+                <div className='p-4 font-poppins text-lg font-medium flex items-center justify-start'>
+                    <input type='checkbox' className='mr-2 w-5 h-5' />
+                    Send feedback anonymously
+                </div>
 
                 <button className='bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] opacity-[60%] rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4'>Submit</button>
             </div>
