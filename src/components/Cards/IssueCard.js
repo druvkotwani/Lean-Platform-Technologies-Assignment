@@ -5,7 +5,7 @@ const IssueCard = ({ handleSubmit }) => {
     let isMessageEmpty = messages.trim() === ''
 
     return (
-        <div className='bg-white w-full lg:w-[430px] gap-[32px] rounded-lg flex flex-col items-start '>
+        <div className='bg-white w-full sm:w-[430px] gap-[32px]  rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <p className='px-4'>
                     Let us know about the
@@ -59,7 +59,7 @@ export default IssueCard
 function astrix() {
     return (
         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.00013 4V12M11.4641 6L4.53613 10M4.53613 6L11.4641 10" stroke="#FD443A" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8.00013 4V12M11.4641 6L4.53613 10M4.53613 6L11.4641 10" stroke="#FD443A" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
 
     )
