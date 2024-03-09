@@ -43,7 +43,7 @@ const Fab = () => {
                 <OptionDiv handleToggle={handleToggle} />
                 :
                 <div className='flex flex-col items-end'>
-                    <Thanks />
+                    <Thanks text1='Thanks for bringing the issue to our attention.' />
                     <OpenFab handleToggle={handleToggle} />
                 </div>
             }
