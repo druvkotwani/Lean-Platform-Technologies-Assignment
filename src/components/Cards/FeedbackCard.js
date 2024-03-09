@@ -5,7 +5,7 @@ const FeedbackCard = ({ handleSubmit }) => {
     let isMessageEmpty = messages.trim() === ''
 
     return (
-        <div className='bg-white w-full sm:w-[430px] gap-[32px] rounded-t-3xl  sm:rounded-lgflex flex-col items-start '>
+        <div className='bg-white w-full sm:w-[430px] gap-[32px] rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <p className='px-4 text-center '>
                     Let us know your <span className='text-black'>Feedback</span>
