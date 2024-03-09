@@ -168,7 +168,7 @@ const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) =
                 !selectedIcon && <span className='mr-2 text-black text-[18px]  font-medium px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-md cursor-pointer'>{text}</span>
             }
 
-            <span className={`${selectedIcon === IconName ? 'shadow-[1px_1px_8px_0px_#808080] p-[2px] border-2 border-[#808080] rounded-full mt-2' : 'm-1'}     cursor-pointer `}>
+            <span className={`${selectedIcon === IconName ? 'shadow-[1px_1px_8px_0px_#808080] p-[2px] border-2 border-white sm:border-[#808080] rounded-full mt-2' : 'm-1'}     cursor-pointer `}>
                 {React.cloneElement(icon, { setSelectedIcon })}
             </span>
         </div>
