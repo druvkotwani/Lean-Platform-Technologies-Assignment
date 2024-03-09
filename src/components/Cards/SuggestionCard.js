@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const SuggestionCard = () => {
+    const [message, setMessages] = useState('')
+    let isMessageEmpty = message.trim() === ''
     return (
         <div className='bg-white  w-[430px] gap-[32px] rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
@@ -33,7 +35,7 @@ const SuggestionCard = () => {
                 </div>
 
                 <div className='px-4 flex justify-start items-end '>
-                    <textarea className='resize-none w-full h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Write here...' />
+                    <textarea onChange={e => setMessages(e.target.value)} className='resize-none w-full h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Write here...' />
                     <button className='absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md font-medium text-black font-poppins text-[19px]'>
                         <span>
                             {attach()}
@@ -44,7 +46,7 @@ const SuggestionCard = () => {
                 </div>
 
 
-                <button className='bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] opacity-[60%] rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4'>Submit</button>
+                <button disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
             </div>
 
         </div>

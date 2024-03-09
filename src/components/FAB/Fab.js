@@ -101,7 +101,6 @@ const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) =
     return (
         <div onClick={() => {
             setSelectedIcon(IconName)
-            console.log(IconName)
         }} key={text} className={`flex justify-center items-center font-poppins rounded-md`}>
             {
                 !selectedIcon && <span className='mr-2 text-black text-[18px] font-medium px-4 py-2 bg-white rounded-md cursor-pointer'>{text}</span>
@@ -116,7 +115,7 @@ const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) =
 
 function OpenFab({ handleToggle }) {
     return (
-        <div onClick={handleToggle} className='w-14 h-14 rounded-full  bg-white flex items-center justify-center '>
+        <div onClick={handleToggle} className=' cursor-pointer w-14 h-14 rounded-full  bg-white flex items-center justify-center '>
             <svg className='ml-2' width="32" height="34" viewBox="0 0 32 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_4645_6127)">
                     <path d="M19.7452 0H2.32296C1.04002 0 0 1.04002 0 2.32296V27.8755C0 29.1584 1.04002 30.1984 2.32296 30.1984H19.7452C21.0281 30.1984 22.0682 29.1584 22.0682 27.8755V2.32296C22.0682 1.04002 21.0281 0 19.7452 0Z" fill="#0F0F0F" />
@@ -143,7 +142,7 @@ function OpenFab({ handleToggle }) {
 
 function CloseFab({ handleToggle }) {
     return (
-        <div onClick={handleToggle} className='w-14 h-14 rounded-full  bg-white flex items-center justify-center'>
+        <div onClick={handleToggle} className='w-14 h-14 rounded-full cursor-pointer   bg-white flex items-center justify-center'>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 2.00122L22 22.0006M2 22.0006L22 2.00122" stroke="#0F0F0F" stroke-width="3.99994" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -196,7 +195,7 @@ function Thumbs({ setSelectedIcon }) {
 function Suggestion({ setSelectedIcon }) {
     return (
         <div onClick={() => setSelectedIcon('suggestion')} className='w-14 h-14 rounded-full  bg-white flex items-center justify-center'>
-            <svg width="31" height="23" viewBox="0 0 31 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="31" className='ml-2 mt-1' height="23" viewBox="0 0 31 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.934082 0.533813V3.63266H17.9778V0.533813H0.934082ZM0.934082 6.73151V9.83037H17.9778V6.73151H0.934082ZM27.2743 6.88646C27.1194 6.88646 26.8095 7.0414 26.6545 7.19634L25.1051 8.74577L28.3589 11.9996L29.9083 10.4501C30.2182 10.1402 30.2182 9.52048 29.9083 9.2106L27.8941 7.19634C27.7391 7.0414 27.5842 6.88646 27.2743 6.88646ZM24.3304 9.67542L14.8789 18.972V22.2258H18.1327L27.5842 12.7743L24.3304 9.67542ZM0.934082 12.9292V16.0281H11.7801V12.9292H0.934082Z" fill="#0F0F0F" />
             </svg>
         </div>
