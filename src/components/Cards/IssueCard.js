@@ -5,21 +5,26 @@ const IssueCard = ({ handleSubmit, login = true }) => {
     const [attachDisabled, setAttachDisabled] = useState(false);
 
     const handleAttach = (event) => {
-
         const files = event.target.files;
         if (files.length > 0 && attachedFiles.length < 2) {
             const file = files[0];
-            // Resize the image to 50x50
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = new Image();
                 img.src = e.target.result;
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
+
+                    canvas.width = 50;
+                    canvas.height = 50;
+
                     const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, 50, 50);
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
                     const resizedDataUrl = canvas.toDataURL('image/jpeg');
                     setAttachedFiles([...attachedFiles, resizedDataUrl]);
+
                     if (attachedFiles.length === 1) {
                         setAttachDisabled(true);
                     }
@@ -28,6 +33,7 @@ const IssueCard = ({ handleSubmit, login = true }) => {
             reader.readAsDataURL(file);
         }
     };
+
 
     const removeFile = (index) => {
         const updatedFiles = attachedFiles.filter((file, i) => i !== index);
@@ -66,6 +72,7 @@ const IssueCard = ({ handleSubmit, login = true }) => {
 
         handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)
     };
+
     return (
         <div className='bg-white w-full sm:w-[430px]  gap-5 sm:gap-6 rounded-t-3xl font-poppins sm:rounded-lg flex flex-col items-start  font-medium '>
             {/* Header */}
@@ -108,7 +115,7 @@ const IssueCard = ({ handleSubmit, login = true }) => {
                         maxLength={1000}
                     />
                     {/* Attach Button */}
-                    <label className='cursor-pointer absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md  text-black  text-[19px]' disabled={attachDisabled ? 'disabled' : ''}>
+                    <label className='font-medium font-poppins cursor-pointer absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md  text-black  text-[19px]' disabled={attachDisabled ? 'disabled' : ''}>
                         <span>{attach()}</span>
                         Attach
                         <input type="file" style={{ display: 'none' }} accept="image/*" onChange={handleAttach} />
@@ -118,8 +125,10 @@ const IssueCard = ({ handleSubmit, login = true }) => {
                     <div className="absolute flex flex-wrap items-center justify-center right-6">
                         {attachedFiles.map((file, index) => (
                             <div key={index} className="relative mx-1 my-1">
-                                <img src={file} alt="Attached File" className="w-12 h-12 object-cover rounded-md" />
-                                <button onClick={() => removeFile(index)} className="absolute top-0 right-0 p-1 bg-red-500 rounded-full text-white text-xs">X</button>
+                                <img src={file} alt="Attached File" className="w-12 h-12 object-cover  rounded-md" />
+                                <button onClick={() => removeFile(index)} className="absolute  top-[-5px] right-[-4px] p-1 bg-[#000000] opacity-[60%] rounded-full text-white text-[10px]">
+                                    {close()}
+                                </button>
                             </div>
                         ))}
                     </div>
@@ -175,3 +184,12 @@ const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 };
+
+function close() {
+    return (
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+
+    )
+}

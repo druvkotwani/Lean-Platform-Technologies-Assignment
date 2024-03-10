@@ -34,6 +34,46 @@ const FeedbackCard = ({ handleSubmit, login = true }) => {
         handleSubmit('Thanks for your valuable feedback!')
     };
 
+    const [attachedFiles, setAttachedFiles] = useState([]);
+    const [attachDisabled, setAttachDisabled] = useState(false);
+
+    const handleAttach = (event) => {
+        const files = event.target.files;
+        if (files.length > 0 && attachedFiles.length < 2) {
+            const file = files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+
+                    canvas.width = 50;
+                    canvas.height = 50;
+
+                    const ctx = canvas.getContext('2d');
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    const resizedDataUrl = canvas.toDataURL('image/jpeg');
+                    setAttachedFiles([...attachedFiles, resizedDataUrl]);
+
+                    if (attachedFiles.length === 1) {
+                        setAttachDisabled(true);
+                    }
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+
+    const removeFile = (index) => {
+        const updatedFiles = attachedFiles.filter((file, i) => i !== index);
+        setAttachedFiles(updatedFiles);
+        setAttachDisabled(false);
+    };
+
     return (
         <div className='bg-white w-full sm:w-[430px] gap-5 sm:gap-6 rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
@@ -48,15 +88,32 @@ const FeedbackCard = ({ handleSubmit, login = true }) => {
 
             <div className='w-full flex flex-col'>
 
-                <div className='px-4 flex justify-start items-end '>
-                    <textarea onChange={(e) => setMessages(e.target.value)} className='resize-none w-full h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Write here...' />
-                    <button className='absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md font-medium text-black font-poppins text-[19px]'>
-                        <span>
-                            {attach()}
-                        </span>
+                <div className='px-4   flex justify-start items-end '>
+                    {/* Text Area */}
+                    <textarea
+                        onChange={(e) => setMessages(e.target.value)}
+                        className={`mt-1 resize-none w-full ${login ? 'h-[200px]' : 'h-[160px]'} bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border`}
+                        placeholder='Write here...'
+                        maxLength={1000}
+                    />
+                    {/* Attach Button */}
+                    <label className='font-medium font-poppins cursor-pointer absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md  text-black  text-[19px]' disabled={attachDisabled ? 'disabled' : ''}>
+                        <span>{attach()}</span>
                         Attach
-                    </button>
+                        <input type="file" style={{ display: 'none' }} accept="image/*" onChange={handleAttach} />
+                    </label>
 
+                    {/* Attached Files */}
+                    <div className="absolute flex flex-wrap items-center justify-center right-6">
+                        {attachedFiles.map((file, index) => (
+                            <div key={index} className="relative mx-1 my-1">
+                                <img src={file} alt="Attached File" className="w-12 h-12 object-cover  rounded-md" />
+                                <button onClick={() => removeFile(index)} className="absolute  top-[-5px] right-[-4px] p-1 bg-[#000000] opacity-[60%] rounded-full text-white text-[10px]">
+                                    {close()}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 {
                     login && (
@@ -115,3 +172,13 @@ const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 };
+
+
+function close() {
+    return (
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+
+    )
+}
