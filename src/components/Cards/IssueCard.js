@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const IssueCard = ({ handleSubmit }) => {
-    const [messages, setMessages] = useState('');
+const IssueCard = ({ handleSubmit, login = false }) => {
     const [attachedFiles, setAttachedFiles] = useState([]);
     const [attachDisabled, setAttachDisabled] = useState(false);
 
@@ -36,8 +35,34 @@ const IssueCard = ({ handleSubmit }) => {
         setAttachDisabled(false);
     };
 
-    let isMessageEmpty = messages.trim() === '';
+    const [message, setMessages] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('');
 
+    const isMessageEmpty = message.trim() === '';
+    const isEmailValid = isValidEmail(email);
+
+    const handleEmailChange = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+
+        // Validate email and set error message accordingly
+        if (!isValidEmail(newEmail)) {
+            setEmailError('invalid email');
+        } else {
+            setEmailError('');
+        }
+    };
+
+    const handleSubmission = () => {
+        // Check if email is valid before submitting
+        if (!isEmailValid) {
+            setEmailError('invalid email');
+            return;
+        }
+
+        handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)
+    };
     return (
         <div className='bg-white w-full sm:w-[430px] gap-6 rounded-t-3xl font-poppins sm:rounded-lg flex flex-col items-start  font-medium '>
             {/* Header */}
@@ -75,7 +100,7 @@ const IssueCard = ({ handleSubmit }) => {
                     {/* Text Area */}
                     <textarea
                         onChange={(e) => setMessages(e.target.value)}
-                        className='resize-none w-full mt-1 h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3    border-[#CCCCCC] border'
+                        className={`mt-1 resize-none w-full ${login ? 'h-[200px]' : 'h-[160px]'} bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border`}
                         placeholder='Write here...'
                         maxLength={1000}
                     />
@@ -97,13 +122,33 @@ const IssueCard = ({ handleSubmit }) => {
                     </div>
                 </div>
 
+                {/* Email input */}
+                {
+                    !login && (
+                        <div className='flex items-start w-full flex-col justify-start px-4 mt-4'>
+                            <p className='text-lg font-poppins font-medium text-[#4D4D4D] flex items-center justify-center gap-1'>
+                                Enter your email to receive an update
+                            </p>
+                            <input
+                                type='email'
+                                value={email}
+                                onChange={handleEmailChange}
+                                className='w-full bg-transparent rounded-lg px-4  py-1 mt-1 font-poppins font-medium text-lg border-2 border-[#999999]'
+                                placeholder='Enter your Email'
+                            />
+                            {/* Display email error */}
+                            {emailError && <p className="text-red-500 font-poppins">{emailError}</p>}
+                        </div>
+                    )
+                }
+
 
 
                 {/* Submit Button */}
                 <button
-                    onClick={() => handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)}
-                    disabled={isMessageEmpty}
-                    className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg   text-[#F8F8F8]  border mt-4`}>
+                    onClick={handleSubmission}
+                    disabled={isMessageEmpty || (!login && !isEmailValid)}
+                    className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty || (!login && !isEmailValid) ? "opacity-[60%]" : ""} rounded-lg   text-[#F8F8F8]  border mt-4`}>
                     Submit
                 </button>
             </div>
@@ -120,3 +165,10 @@ function attach() {
         </svg>
     );
 }
+
+// Function to validate email
+const isValidEmail = (email) => {
+    // Use a regular expression to validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};

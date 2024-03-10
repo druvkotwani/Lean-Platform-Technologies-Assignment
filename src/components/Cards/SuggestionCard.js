@@ -92,7 +92,7 @@ const SuggestionCard = ({ handleSubmit, login = false }) => {
                 }
 
 
-                <button onClick={handleSubmission} disabled={isMessageEmpty || !isEmailValid} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+                <button onClick={handleSubmission} disabled={isMessageEmpty || (!login && !isEmailValid)} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty || (!login && !isEmailValid) ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
             </div>
 
         </div>
