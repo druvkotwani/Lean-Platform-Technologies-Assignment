@@ -1,40 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Assignment for Lean Platform Technologies
 
-## Getting Started
+This project is the assignment given to us by Lean Platform Technologies.
 
-First, run the development server:
+## Screenshots
+
+![image](https://github.com/druvkotwani/Lean-Platform-Technologies-Assignment/assets/96691139/42f0c85c-9ea8-4a51-9149-b7f0f34cc58a)
+![image](https://github.com/druvkotwani/Lean-Platform-Technologies-Assignment/assets/96691139/f61b25d4-22f3-4c54-ac17-f3b9a5b6e6f3)
+![image](https://github.com/druvkotwani/Lean-Platform-Technologies-Assignment/assets/96691139/ead9b6e0-dba4-4e3c-aaf7-f5735d3cbfc5)
+![image](https://github.com/druvkotwani/Lean-Platform-Technologies-Assignment/assets/96691139/25dd08a6-95b7-4f52-9508-7d01368b8b7c)
+
+
+
+
+
+### Responsive [Mobile Devices]
+![image](https://github.com/druvkotwani/Lean-Platform-Technologies-Assignment/assets/96691139/db6ace9c-475c-48bb-9e2a-0af67ffbbbf6)
+![image](https://github.com/druvkotwani/Lean-Platform-Technologies-Assignment/assets/96691139/70ecd1be-52ac-483c-99c2-3ce70d4d8978)
+
+
+
+## Languages/Tools
+
+<a href="">
+    <img src="https://skillicons.dev/icons?i=tailwindcss,js,react,next,vercel" />
+  </a>
+
+## 👩🏽‍💻 Demo
+Check out the website: [Website](https://lptech-assignment-dhruvkotwani.vercel.app/)
+
+
+## 🚀 Running Frontend
+To run locally, run the following commands to run node modules and serve the website locally.
+```bash
+npm i
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<hr/>
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## This project is the assignment to us given by Mehar Kaila[WordleCup.io].
+## Drop a ⭐ if you like this project.
