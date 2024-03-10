@@ -23,7 +23,7 @@ const Navbar = () => {
                     priority
                     width={40}
                     height={40}
-                    src='/images/Profileimg.png'
+                    src='/Images/Profileimg.png'
                     alt="Profile Image"
                 />
             </div>
