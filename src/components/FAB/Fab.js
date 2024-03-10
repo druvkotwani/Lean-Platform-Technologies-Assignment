@@ -76,10 +76,10 @@ const Fab = () => {
             </div>
 
             {/* Mobile */}
-            <div className={`${isOpen && selectedIcon.length > 0 ? 'bottom-0 mt-4  fixed right-0' : 'bottom-[24px] right-[24px] '} fixed w-full sm:hidden `}>
+            <div className={`${isOpen && selectedIcon.length > 0 ? 'bottom-0  right-0' : 'bottom-[24px] right-[24px] '} fixed w-full sm:hidden `}>
                 {isOpen ?
                     <div className='modal-overlay'>
-                        <div className={`${isOpen & selectedIcon.length > 0 ? 'bottom-0 fixed right-0' : 'bottom-[24px] right-[24px] fixed '} z-20 w-full `}>
+                        <div className={`${isOpen & selectedIcon.length > 0 ? 'bottom-0 fixed right-0' : 'bottom-[24px] right-[24px] fixed '} z-20 w-full  `}>
                             <OptionDiv selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
                         </div>
                     </div>
@@ -120,7 +120,7 @@ const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon }
                 }
             </div>
 
-            <div className={` bg-transparent flex items-end justify-center  ${!selectedIcon ? 'flex-col gap-2 sm:gap-6 w-[256px] ' : 'flex-row gap-2 mx-auto sm:mx-0'}  `}>
+            <div className={` bg-transparent flex items-end justify-end  ${!selectedIcon ? 'flex-col gap-3 sm:gap-6 w-[256px] ' : 'flex-row gap-4 mx-auto sm:mx-0'}  `}>
 
                 {
                     feedbackOptions.map((option, index) => {
@@ -140,7 +140,7 @@ const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon }
                 <CloseFab handleToggle={handleToggle} />
             </div >
             {/* Mobile */}
-            <div className='sm:hidden w-full mt-2'>
+            <div className={`sm:hidden w-full ${selectedIcon.length > 0 ? 'mt-2' : ''}`}>
                 {
                     selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
                 }
@@ -165,10 +165,10 @@ const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) =
     return (
         <div onClick={() => { setSelectedIcon(IconName) }} key={text} className={`flex justify-center items-center font-poppins rounded-md `}>
             {
-                !selectedIcon && <span className='mr-2 text-black text-[18px]  font-medium px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-md cursor-pointer'>{text}</span>
+                !selectedIcon && <span className='mr-2 text-black  sm:text-lg font-medium px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-md cursor-pointer'>{text}</span>
             }
 
-            <span className={`${selectedIcon === IconName ? 'shadow-[1px_1px_8px_0px_#808080] p-[2px] border-2 border-white sm:border-[#808080] rounded-full mt-2' : 'm-1'}     cursor-pointer `}>
+            <span className={`${selectedIcon === IconName ? 'shadow-[1px_1px_8px_0px_#808080] p-[2px] border-2 border-white sm:border-[#808080] rounded-full mt-2' : ''}     cursor-pointer `}>
                 {React.cloneElement(icon, { setSelectedIcon })}
             </span>
         </div>
@@ -177,7 +177,7 @@ const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) =
 
 function OpenFab({ handleToggle }) {
     return (
-        <div onClick={handleToggle} className='w-12 h-12 mr-1 cursor-pointer sm:w-14 sm:h-14 rounded-full  bg-white flex items-center justify-center '>
+        <div onClick={handleToggle} className='w-12 h-12  cursor-pointer sm:w-14 sm:h-14 rounded-full  bg-white flex items-center justify-center '>
             <svg className='ml-2' width="32" height="34" viewBox="0 0 32 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_4645_6127)">
                     <path d="M19.7452 0H2.32296C1.04002 0 0 1.04002 0 2.32296V27.8755C0 29.1584 1.04002 30.1984 2.32296 30.1984H19.7452C21.0281 30.1984 22.0682 29.1584 22.0682 27.8755V2.32296C22.0682 1.04002 21.0281 0 19.7452 0Z" fill="#0F0F0F" />
@@ -203,7 +203,7 @@ function OpenFab({ handleToggle }) {
 }
 function MobileFab({ handleToggle }) {
     return (
-        <div onClick={handleToggle} className='w-12 h-12 mr-1 sm:w-14 sm:h-14  rounded-full cursor-pointer   bg-white flex items-center justify-center'>
+        <div onClick={handleToggle} className='w-12 h-12 sm:w-14 sm:h-14  rounded-full cursor-pointer   bg-white flex items-center justify-center'>
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13.6324 0.221694C13.432 0.32461 13.3399 0.454611 12.7278 1.46211C12.4949 1.84669 12.2728 2.20419 12.2349 2.24211C12.1916 2.28544 11.6878 2.43711 11.1028 2.57794C10.5232 2.71336 9.987 2.87044 9.91117 2.91919C9.6945 3.06003 9.55908 3.32544 9.55908 3.60711C9.55908 3.89961 9.597 3.95378 10.4745 4.98294C11.1678 5.80086 11.1245 5.61669 10.9999 7.06836C10.9241 7.97294 10.9457 8.19503 11.1462 8.41711C11.287 8.56878 11.5578 8.69336 11.7582 8.69336C11.8341 8.69336 12.3703 8.49836 12.9499 8.26003L14.0007 7.82669L15.0516 8.26003C15.6312 8.49836 16.1674 8.69336 16.2432 8.69336C16.4437 8.69336 16.7145 8.56878 16.8553 8.41711C17.0557 8.19503 17.0774 7.97294 17.0016 7.06836C16.877 5.61669 16.8337 5.80086 17.527 4.98294C18.4045 3.95378 18.4424 3.89961 18.4424 3.60711C18.4424 3.32544 18.307 3.06003 18.0903 2.91919C18.0091 2.86503 17.4782 2.71336 16.9095 2.57794C16.3353 2.43711 15.8424 2.31253 15.8099 2.29086C15.7828 2.26919 15.5012 1.83586 15.187 1.32669C14.8782 0.806694 14.5532 0.346277 14.4666 0.281278C14.2607 0.135027 13.8599 0.102527 13.6324 0.221694Z" fill="#0F0F0F" />
                 <path d="M4.22386 3.42833C3.99094 3.57458 3.94219 3.63958 3.35719 4.60374C3.06469 5.08041 2.82094 5.48124 2.81011 5.48666C2.80469 5.49749 2.29553 5.62749 1.68344 5.77916C1.02261 5.93624 0.518861 6.08791 0.443027 6.14749C0.269694 6.28291 0.134277 6.57541 0.134277 6.80833C0.134277 7.05208 0.253444 7.23083 0.963027 8.06499C1.29886 8.45499 1.59678 8.81249 1.63469 8.85583C1.68344 8.92083 1.67803 9.14833 1.61844 9.83083C1.51553 11.1037 1.51553 11.2933 1.66178 11.51C1.83511 11.7592 2.11136 11.9 2.38219 11.8729C2.50136 11.8567 3.04844 11.6617 3.60094 11.4342L4.60303 11.0171L5.64303 11.4558C6.21719 11.6942 6.75344 11.8892 6.83469 11.8892C7.11094 11.8892 7.43053 11.6833 7.55511 11.4287C7.66886 11.1958 7.66886 11.1958 7.57678 10.0583L7.49011 8.92083L8.18344 8.09749C8.56803 7.64791 8.91469 7.21458 8.95803 7.13333C9.07178 6.91666 9.05553 6.54833 8.93094 6.38041C8.71969 6.09874 8.54636 6.02833 7.47386 5.76833C6.88886 5.62749 6.39594 5.49208 6.37428 5.47041C6.35261 5.45416 6.08178 5.02083 5.76761 4.51166C5.45344 4.00249 5.13386 3.53666 5.05261 3.47708C4.84678 3.31999 4.42969 3.29833 4.22386 3.42833Z" fill="#0F0F0F" />
@@ -220,7 +220,7 @@ function MobileFab({ handleToggle }) {
 
 function CloseFab({ handleToggle }) {
     return (
-        <div onClick={handleToggle} className='w-12 h-12 mr-1 sm:w-14 mb-1 sm:h-14 rounded-full cursor-pointer   bg-white flex items-center justify-center'>
+        <div onClick={handleToggle} className='w-12 h-12  sm:w-14  sm:h-14 rounded-full cursor-pointer   bg-white flex items-center justify-center'>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 2.00122L22 22.0006M2 22.0006L22 2.00122" stroke="#0F0F0F" strokeWidth="3.99994" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

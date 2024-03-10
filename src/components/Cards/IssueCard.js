@@ -39,10 +39,10 @@ const IssueCard = ({ handleSubmit }) => {
     let isMessageEmpty = messages.trim() === '';
 
     return (
-        <div className='bg-white w-full sm:w-[430px] gap-[32px]  rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
+        <div className='bg-white w-full sm:w-[430px] gap-[32px]  rounded-t-3xl font-poppins sm:rounded-lg flex flex-col items-start  font-medium '>
             {/* Header */}
-            <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
-                <p className='px-4'>
+            <header className='text-[#4D4D4D] text-xl   border-b-2  px-4 py-4  flex items-center justify-center w-full'>
+                <p className='px-4 text-center'>
                     Let us know about the
                     <span className='text-black'> Issue</span>
                     <br />
@@ -51,10 +51,10 @@ const IssueCard = ({ handleSubmit }) => {
             </header>
 
             {/* Section Selector */}
-            <div className='w-full'>
+            <div className='w-full text-lg'>
                 <div className='flex items-start flex-col justify-start px-4 '>
-                    <p className='text-lg font-poppins font-medium text-[#4D4D4D]'>Choose a section</p>
-                    <select className='bg-[#E0E0E0] w-full py-3 px-4 rounded-lg text-lg font-poppins font-medium border-[#CCCCCC] border  '>
+                    <p className='  text-[#4D4D4D] '>Choose a section</p>
+                    <select className='bg-[#E0E0E0] w-full py-3 px-4 rounded-lg   border-[#CCCCCC] border  '>
                         <option value="option0">Concept Cards</option>
                         <option value="option1">Interview Questions</option>
                         <option value="option2">Practice Questions</option>
@@ -64,9 +64,9 @@ const IssueCard = ({ handleSubmit }) => {
             </div>
 
             {/* Issue Description */}
-            <div className='w-full flex flex-col'>
+            <div className='w-full text-lg flex flex-col'>
                 <div className='flex items-start flex-col justify-start px-4 '>
-                    <p className='text-lg font-poppins font-medium text-[#4D4D4D] flex  items-center justify-center gap-1'>
+                    <p className='   text-[#4D4D4D] flex  items-center justify-center gap-1'>
                         Describe the issue in detail
                     </p>
                 </div>
@@ -75,12 +75,12 @@ const IssueCard = ({ handleSubmit }) => {
                     {/* Text Area */}
                     <textarea
                         onChange={(e) => setMessages(e.target.value)}
-                        className='resize-none w-full h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border'
+                        className='resize-none w-full h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3    border-[#CCCCCC] border'
                         placeholder='Write here...'
                         maxLength={1000}
                     />
                     {/* Attach Button */}
-                    <label className='cursor-pointer absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md font-medium text-black font-poppins text-[19px]' disabled={attachDisabled ? 'disabled' : ''}>
+                    <label className='cursor-pointer absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md  text-black  text-[19px]' disabled={attachDisabled ? 'disabled' : ''}>
                         <span>{attach()}</span>
                         Attach
                         <input type="file" style={{ display: 'none' }} accept="image/*" onChange={handleAttach} />
@@ -103,7 +103,7 @@ const IssueCard = ({ handleSubmit }) => {
                 <button
                     onClick={() => handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)}
                     disabled={isMessageEmpty}
-                    className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>
+                    className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg   text-[#F8F8F8]  border mt-4`}>
                     Submit
                 </button>
             </div>
