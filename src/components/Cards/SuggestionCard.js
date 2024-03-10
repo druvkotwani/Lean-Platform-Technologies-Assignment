@@ -1,10 +1,37 @@
 import React, { useState } from 'react'
 
-const SuggestionCard = ({ handleSubmit }) => {
-    const [message, setMessages] = useState('')
-    let isMessageEmpty = message.trim() === ''
+const SuggestionCard = ({ handleSubmit, login = false }) => {
+    const [message, setMessages] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('');
+
+    const isMessageEmpty = message.trim() === '';
+    const isEmailValid = isValidEmail(email);
+
+    const handleEmailChange = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+
+        // Validate email and set error message accordingly
+        if (!isValidEmail(newEmail)) {
+            setEmailError('invalid email');
+        } else {
+            setEmailError('');
+        }
+    };
+
+    const handleSubmission = () => {
+        // Check if email is valid before submitting
+        if (!isEmailValid) {
+            setEmailError('invalid email');
+            return;
+        }
+
+        // Proceed with submission
+        handleSubmit('Thanks for your valuable Suggestion!');
+    };
     return (
-        <div className='bg-white w-full  sm:w-[430px] gap-[32px] rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
+        <div className='bg-white w-full  sm:w-[430px] gap-6 rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <p className='sm:px-4 px-3 text-center'>
                     Share your <span className='text-black'>Suggestions</span> with us
@@ -16,7 +43,7 @@ const SuggestionCard = ({ handleSubmit }) => {
             <div className='w-full'>
                 <div className='flex items-start flex-col justify-start px-4 '>
                     <p className='text-lg font-poppins font-medium text-[#4D4D4D]'>Choose a section</p>
-                    <select className='bg-[#E0E0E0] w-full py-3 px-4 rounded-lg text-lg font-poppins font-medium border-[#CCCCCC] border  '>
+                    <select className='bg-[#E0E0E0] mt-1 w-full py-3 px-4 rounded-lg text-lg font-poppins font-medium border-[#CCCCCC] border  '>
                         <option value="">Select</option>
                         <option value="option0">Concept Cards</option>
                         <option value="option1">Interview Questions</option>
@@ -35,18 +62,37 @@ const SuggestionCard = ({ handleSubmit }) => {
                 </div>
 
                 <div className='px-4 flex justify-start items-end '>
-                    <textarea onChange={e => setMessages(e.target.value)} className='resize-none w-full h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Write here...' />
+                    <textarea onChange={e => setMessages(e.target.value)} className={`mt-1 resize-none w-full ${login ? 'h-[200px]' : 'h-[160px]'} bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border`} placeholder='Write here...' />
                     <button className='absolute flex justify-center items-center  bg-[#C7C7C7] px-[10px] py-1 ml-2 mb-2 rounded-md font-medium text-black font-poppins text-[19px]'>
                         <span>
                             {attach()}
                         </span>
                         Attach
                     </button>
-
                 </div>
 
+                {/* Email input */}
+                {
+                    !login && (
+                        <div className='flex items-start w-full flex-col justify-start px-4 mt-4'>
+                            <p className='text-lg font-poppins font-medium text-[#4D4D4D] flex items-center justify-center gap-1'>
+                                Enter your email to receive an update
+                            </p>
+                            <input
+                                type='email'
+                                value={email}
+                                onChange={handleEmailChange}
+                                className='w-full bg-transparent rounded-lg px-4  py-1 mt-1 font-poppins font-medium text-lg border-2 border-[#999999]'
+                                placeholder='Enter your Email'
+                            />
+                            {/* Display email error */}
+                            {emailError && <p className="text-red-500 font-poppins">{emailError}</p>}
+                        </div>
+                    )
+                }
 
-                <button onClick={() => handleSubmit('Thanks for your valuable Suggestion!')} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+
+                <button onClick={handleSubmission} disabled={isMessageEmpty || !isEmailValid} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
             </div>
 
         </div>
@@ -72,3 +118,10 @@ function attach() {
 
     )
 }
+
+// Function to validate email
+const isValidEmail = (email) => {
+    // Use a regular expression to validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};

@@ -6,7 +6,7 @@ const ContactCard = ({ handleSubmit }) => {
     const isMessageEmpty = message.trim() === ''
 
     return (
-        <div className='bg-white w-full sm:w-[430px] gap-[32px] rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
+        <div className='bg-white w-full sm:w-[430px] gap-6 rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]   text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <div className='px-4 flex flex-col items-center justify-center  '>
                     <p>Get in
@@ -20,7 +20,7 @@ const ContactCard = ({ handleSubmit }) => {
             <div className='w-full'>
                 <div className='flex items-start flex-col justify-start px-4 '>
                     <p className='text-lg font-poppins font-medium text-[#4D4D4D]'>Your Name</p>
-                    <input type='text' value={name} onChange={(e) => setName(e.target.value)} className='w-full bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Enter your name' />
+                    <input type='text' value={name} onChange={(e) => setName(e.target.value)} className='mt-1 w-full bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Enter your name' />
                 </div>
             </div>
 
@@ -33,11 +33,11 @@ const ContactCard = ({ handleSubmit }) => {
                 </div>
 
                 <div className='px-4 flex justify-start items-end '>
-                    <textarea value={message} onChange={(e) => setMessage(e.target.value)} className='resize-none w-full h-[130px]  bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Write here...' />
+                    <textarea value={message} onChange={(e) => setMessage(e.target.value)} className='mt-1 resize-none w-full h-[130px]  bg-[#E0E0E0] rounded-lg px-4 py-3 font-poppins font-medium text-lg border-[#CCCCCC] border' placeholder='Write here...' />
 
                 </div>
 
-                <button onClick={() => handleSubmit('Thanks for reaching out to us! ', `We will get back to you as soon as possible`)} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${message.length > 0 ? '' : 'opacity-[60%]'} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+                <button onClick={() => handleSubmit('Thanks for reaching out to us! ', `We will get back to you as soon as possible`)} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${message.length > 0 ? '' : 'opacity-[60%]'} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
 
             </div>
 

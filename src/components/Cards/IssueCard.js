@@ -39,7 +39,7 @@ const IssueCard = ({ handleSubmit }) => {
     let isMessageEmpty = messages.trim() === '';
 
     return (
-        <div className='bg-white w-full sm:w-[430px] gap-[32px]  rounded-t-3xl font-poppins sm:rounded-lg flex flex-col items-start  font-medium '>
+        <div className='bg-white w-full sm:w-[430px] gap-6 rounded-t-3xl font-poppins sm:rounded-lg flex flex-col items-start  font-medium '>
             {/* Header */}
             <header className='text-[#4D4D4D] text-xl   border-b-2  px-4 py-4  flex items-center justify-center w-full'>
                 <p className='px-4 text-center'>
@@ -54,7 +54,7 @@ const IssueCard = ({ handleSubmit }) => {
             <div className='w-full text-lg'>
                 <div className='flex items-start flex-col justify-start px-4 '>
                     <p className='  text-[#4D4D4D] '>Choose a section</p>
-                    <select className='bg-[#E0E0E0] w-full py-3 px-4 rounded-lg   border-[#CCCCCC] border  '>
+                    <select className='bg-[#E0E0E0] mt-1 w-full py-3 px-4 rounded-lg   border-[#CCCCCC] border  '>
                         <option value="option0">Concept Cards</option>
                         <option value="option1">Interview Questions</option>
                         <option value="option2">Practice Questions</option>
@@ -75,7 +75,7 @@ const IssueCard = ({ handleSubmit }) => {
                     {/* Text Area */}
                     <textarea
                         onChange={(e) => setMessages(e.target.value)}
-                        className='resize-none w-full h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3    border-[#CCCCCC] border'
+                        className='resize-none w-full mt-1 h-[200px] bg-[#E0E0E0] rounded-lg px-4 py-3    border-[#CCCCCC] border'
                         placeholder='Write here...'
                         maxLength={1000}
                     />
@@ -103,7 +103,7 @@ const IssueCard = ({ handleSubmit }) => {
                 <button
                     onClick={() => handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)}
                     disabled={isMessageEmpty}
-                    className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-[10px] ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg   text-[#F8F8F8]  border mt-4`}>
+                    className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg   text-[#F8F8F8]  border mt-4`}>
                     Submit
                 </button>
             </div>
