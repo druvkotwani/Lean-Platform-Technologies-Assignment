@@ -22,9 +22,12 @@ const SuggestionCard = ({ handleSubmit, login = true }) => {
 
     const handleSubmission = () => {
         // Check if email is valid before submitting
-        if (!isEmailValid) {
-            setEmailError('invalid email');
-            return;
+        if (!login) {
+
+            if (!isEmailValid) {
+                setEmailError('invalid email');
+                return;
+            }
         }
 
         // Proceed with submission

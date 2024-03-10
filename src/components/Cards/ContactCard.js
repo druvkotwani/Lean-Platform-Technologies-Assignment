@@ -24,9 +24,11 @@ const ContactCard = ({ handleSubmit, login = true }) => {
 
     const handleSubmission = () => {
         // Check if email is valid before submitting
-        if (!isEmailValid) {
-            setEmailError('invalid email');
-            return;
+        if (!login) {
+            if (!isEmailValid) {
+                setEmailError('invalid email');
+                return;
+            }
         }
 
         handleSubmit('Thanks for reaching out to us! ', `We will get back to you as soon as possible`)

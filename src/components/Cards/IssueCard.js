@@ -56,9 +56,12 @@ const IssueCard = ({ handleSubmit, login = true }) => {
 
     const handleSubmission = () => {
         // Check if email is valid before submitting
-        if (!isEmailValid) {
-            setEmailError('invalid email');
-            return;
+        if (!login) {
+
+            if (!isEmailValid) {
+                setEmailError('invalid email');
+                return;
+            }
         }
 
         handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)
