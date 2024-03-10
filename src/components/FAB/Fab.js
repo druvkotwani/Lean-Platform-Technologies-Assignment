@@ -4,6 +4,8 @@ import SuggestionCard from '../Cards/SuggestionCard';
 import FeedbackCard from '../Cards/FeedbackCard';
 import IssueCard from '../Cards/IssueCard';
 import Thanks from '../Thanks/Thanks';
+import { useRouter } from 'next/router';
+
 
 const feedbackOptions = [
     {
@@ -29,6 +31,12 @@ const feedbackOptions = [
 ]
 
 const Fab = () => {
+    const router = useRouter();
+    const pathname = router.pathname;
+    const lastSegment = pathname.split('/').pop();
+
+    const login = lastSegment === 'login' ? true : false;
+
     const [isOpen, setIsOpen] = useState(false);
     const [submit, setSubmit] = useState(false)
     const [text1, setText1] = useState('')
@@ -64,7 +72,7 @@ const Fab = () => {
             {/* Desktop */}
             <div className='bottom-[32px] right-[32px] fixed w-full hidden sm:block'>
                 {isOpen ?
-                    <OptionDiv selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
+                    <OptionDiv login={login} selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
                     :
                     (<div className=' flex-col items-end hidden sm:flex'>
                         {
@@ -80,7 +88,7 @@ const Fab = () => {
                 {isOpen ?
                     <div className='modal-overlay'>
                         <div className={`${isOpen & selectedIcon.length > 0 ? 'bottom-0 fixed right-0' : 'bottom-[24px] right-[24px] fixed '} z-20 w-full  `}>
-                            <OptionDiv selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
+                            <OptionDiv login={login} selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} handleSubmit={handleSubmit} handleToggle={handleToggle} />
                         </div>
                     </div>
                     :
@@ -100,23 +108,23 @@ const Fab = () => {
 
 export default Fab
 
-const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon }) => {
+const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon, login }) => {
 
     return (
         <div className='flex flex-col items-end z-20 w-full  '>
             {/* Desktop */}
             <div className='hidden sm:block'>
                 {
-                    selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'flag' && <IssueCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'thumb' && <FeedbackCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'thumb' && <FeedbackCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'suggestion' && <SuggestionCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'suggestion' && <SuggestionCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'contactus' && <ContactCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'contactus' && <ContactCard login={login} handleSubmit={handleSubmit} />
                 }
             </div>
 
@@ -142,16 +150,16 @@ const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon }
             {/* Mobile */}
             <div className={`sm:hidden w-full ${selectedIcon.length > 0 ? 'mt-2' : ''}`}>
                 {
-                    selectedIcon === 'flag' && <IssueCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'flag' && <IssueCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'thumb' && <FeedbackCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'thumb' && <FeedbackCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'suggestion' && <SuggestionCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'suggestion' && <SuggestionCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'contactus' && <ContactCard handleSubmit={handleSubmit} />
+                    selectedIcon === 'contactus' && <ContactCard login={login} handleSubmit={handleSubmit} />
                 }
             </div>
         </div>
