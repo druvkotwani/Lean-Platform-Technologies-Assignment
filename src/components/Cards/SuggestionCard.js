@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const SuggestionCard = ({ handleSubmit, login = false }) => {
+const SuggestionCard = ({ handleSubmit, login = true }) => {
     const [message, setMessages] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -31,7 +31,7 @@ const SuggestionCard = ({ handleSubmit, login = false }) => {
         handleSubmit('Thanks for your valuable Suggestion!');
     };
     return (
-        <div className='bg-white w-full  sm:w-[430px] gap-6 rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
+        <div className='bg-white w-full  sm:w-[430px] gap-5 sm:gap-6 rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <p className='sm:px-4 px-3 text-center'>
                     Share your <span className='text-black'>Suggestions</span> with us

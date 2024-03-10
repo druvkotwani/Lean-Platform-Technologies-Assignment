@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const IssueCard = ({ handleSubmit, login = false }) => {
+const IssueCard = ({ handleSubmit, login = true }) => {
     const [attachedFiles, setAttachedFiles] = useState([]);
     const [attachDisabled, setAttachDisabled] = useState(false);
 
@@ -64,7 +64,7 @@ const IssueCard = ({ handleSubmit, login = false }) => {
         handleSubmit('Thanks for bringing the issue to our attention', `We'll review it and provide an update soon!`)
     };
     return (
-        <div className='bg-white w-full sm:w-[430px] gap-6 rounded-t-3xl font-poppins sm:rounded-lg flex flex-col items-start  font-medium '>
+        <div className='bg-white w-full sm:w-[430px]  gap-5 sm:gap-6 rounded-t-3xl font-poppins sm:rounded-lg flex flex-col items-start  font-medium '>
             {/* Header */}
             <header className='text-[#4D4D4D] text-xl   border-b-2  px-4 py-4  flex items-center justify-center w-full'>
                 <p className='px-4 text-center'>

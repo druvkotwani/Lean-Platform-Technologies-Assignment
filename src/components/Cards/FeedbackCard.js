@@ -1,11 +1,38 @@
 import React, { useState } from 'react'
 
-const FeedbackCard = ({ handleSubmit }) => {
-    const [messages, setMessages] = useState('')
-    let isMessageEmpty = messages.trim() === ''
+const FeedbackCard = ({ handleSubmit, login = true }) => {
+    const [message, setMessages] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState('');
+
+    const isMessageEmpty = message.trim() === '';
+    const isEmailValid = isValidEmail(email);
+
+    const handleEmailChange = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+
+        // Validate email and set error message accordingly
+        if (!isValidEmail(newEmail)) {
+            setEmailError('invalid email');
+        } else {
+            setEmailError('');
+        }
+    };
+
+    const handleSubmission = () => {
+        // Check if email is valid before submitting
+        if (!isEmailValid) {
+            setEmailError('invalid email');
+            return;
+        }
+
+        // Proceed with submission
+        handleSubmit('Thanks for your valuable feedback!')
+    };
 
     return (
-        <div className='bg-white w-full sm:w-[430px] gap-6 rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
+        <div className='bg-white w-full sm:w-[430px] gap-5 sm:gap-6 rounded-t-3xl  sm:rounded-lg flex flex-col items-start '>
             <header className='text-[#4D4D4D]  text-xl font-medium border-b-2  px-4 py-4 font-poppins flex items-center justify-center w-full'>
                 <p className='px-4 text-center '>
                     Let us know your <span className='text-black'>Feedback</span>
@@ -28,12 +55,40 @@ const FeedbackCard = ({ handleSubmit }) => {
                     </button>
 
                 </div>
-                <div className='p-4 font-poppins text-lg font-medium flex items-center justify-start'>
-                    <input type='checkbox' className='mr-2 w-5 h-5' />
-                    Send feedback anonymously
-                </div>
+                {
+                    login && (
+                        <div className='p-4 font-poppins text-lg font-medium flex items-center justify-start'>
+                            <input type='checkbox' className='mr-2 w-5 h-5' />
+                            Send feedback anonymously
+                        </div>
+                    )
+                }
 
-                <button onClick={() => handleSubmit('Thanks for your valuable feedback!')} disabled={isMessageEmpty} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+                {/* Email input */}
+                {
+                    !login && (
+                        <div className='flex items-start w-full flex-col justify-start px-4 mt-4'>
+                            <p className='text-lg font-poppins font-medium text-[#4D4D4D] flex items-center justify-center gap-1'>
+                                Enter your email to receive an update
+                            </p>
+                            <input
+                                type='email'
+                                value={email}
+                                onChange={handleEmailChange}
+                                className='w-full bg-transparent rounded-lg px-4  py-1 mt-1 font-poppins font-medium text-lg border-2 border-[#999999]'
+                                placeholder='Enter your Email'
+                            />
+                            {/* Display email error */}
+                            {emailError && <p className="text-red-500 font-poppins">{emailError}</p>}
+                        </div>
+                    )
+                }
+
+
+
+                {/* Submit Button */}
+                <button onClick={handleSubmission} disabled={isMessageEmpty || (!login && !isEmailValid)} className={`bg-[#0F0F0F] ml-auto mb-4 mx-4 px-5 py-2 ${isMessageEmpty || (!login && !isEmailValid) ? "opacity-[60%]" : ""} rounded-lg text-lg font-poppins font-medium text-[#F8F8F8]  border mt-4`}>Submit</button>
+
             </div>
 
         </div>
@@ -50,3 +105,10 @@ function attach() {
 
     )
 }
+
+// Function to validate email
+const isValidEmail = (email) => {
+    // Use a regular expression to validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
