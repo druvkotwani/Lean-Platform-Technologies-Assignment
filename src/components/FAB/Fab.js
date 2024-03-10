@@ -1,32 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ContactCard from '../Cards/ContactCard';
 import SuggestionCard from '../Cards/SuggestionCard';
 import FeedbackCard from '../Cards/FeedbackCard';
 import IssueCard from '../Cards/IssueCard';
 import Thanks from '../Thanks/Thanks';
 import { useRouter } from 'next/router';
+import { SelectedValuesContext } from '@/context/components';
 
 
-const feedbackOptions = [
+let feedbackOptions = [
     {
         text: 'Report an Issue',
         icon: <Flag />,
-        IconName: 'flag'
+        IconName: 'flag',
+        display: true
     },
     {
         text: 'Share Feedback',
         icon: <Thumbs />,
-        IconName: 'thumb'
+        IconName: 'thumb',
+        display: true
+
     },
     {
         text: 'Give Suggestion',
         icon: <Suggestion />,
-        IconName: 'suggestion'
+        IconName: 'suggestion',
+        display: true
     },
     {
         text: 'Contact Us',
         icon: <ContactUS />,
-        IconName: 'contactus'
+        IconName: 'contactus',
+        display: true
     }
 ]
 
@@ -43,8 +49,6 @@ const Fab = () => {
     const [text2, setText2] = useState('')
 
     const [selectedIcon, setSelectedIcon] = useState('')
-
-
 
     const handleToggle = () => {
         setSelectedIcon('')
@@ -109,40 +113,59 @@ const Fab = () => {
 export default Fab
 
 const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon, login }) => {
+    const { selectedValues } = useContext(SelectedValuesContext);
+
+    feedbackOptions = feedbackOptions.map((option) => {
+        if (option.text === 'Report an Issue') {
+            return { ...option, display: selectedValues.issue }
+        }
+        if (option.text === 'Share Feedback') {
+            return { ...option, display: selectedValues.feedback }
+        }
+        if (option.text === 'Give Suggestion') {
+            return { ...option, display: selectedValues.suggestion }
+        }
+        if (option.text === 'Contact Us') {
+            return { ...option, display: selectedValues.contact }
+        }
+    })
+
+
 
     return (
         <div className='flex flex-col items-end z-20 w-full  '>
             {/* Desktop */}
             <div className='hidden sm:block'>
                 {
-                    selectedIcon === 'flag' && <IssueCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'flag' && selectedValues.issue && <IssueCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'thumb' && <FeedbackCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'thumb' && selectedValues.feedback && <FeedbackCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'suggestion' && <SuggestionCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'suggestion' && selectedValues.suggestion && <SuggestionCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'contactus' && <ContactCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'contactus' && selectedValues.contact && <ContactCard login={login} handleSubmit={handleSubmit} />
                 }
             </div>
 
             <div className={` bg-transparent flex items-end justify-end  ${!selectedIcon ? 'flex-col gap-3 sm:gap-6 w-[256px] ' : 'flex-row gap-4 mx-auto sm:mx-0'}  `}>
 
                 {
-                    feedbackOptions.map((option, index) => {
-                        return (
-                            <EachOptioin
-                                key={index}
-                                text={option.text}
-                                icon={option.icon}
-                                IconName={option.IconName}
-                                selectedIcon={selectedIcon}
-                                setSelectedIcon={setSelectedIcon}
-                            />
-                        )
-                    })
+                    feedbackOptions.filter(option => option.display === true)
+                        .map((option, index) => {
+                            return (
+                                <EachOptioin
+                                    key={index}
+                                    text={option.text}
+                                    icon={option.icon}
+                                    IconName={option.IconName}
+                                    selectedIcon={selectedIcon}
+                                    setSelectedIcon={setSelectedIcon}
+                                />
+                            )
+                        })
                 }
 
                 <CloseFab handleToggle={handleToggle} />
@@ -150,16 +173,16 @@ const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon, 
             {/* Mobile */}
             <div className={`sm:hidden w-full ${selectedIcon.length > 0 ? 'mt-2' : ''}`}>
                 {
-                    selectedIcon === 'flag' && <IssueCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'flag' && selectedValues.issue && <IssueCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'thumb' && <FeedbackCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'thumb' && selectedValues.feedback && <FeedbackCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'suggestion' && <SuggestionCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'suggestion' && selectedValues.suggestion && <SuggestionCard login={login} handleSubmit={handleSubmit} />
                 }
                 {
-                    selectedIcon === 'contactus' && <ContactCard login={login} handleSubmit={handleSubmit} />
+                    selectedIcon === 'contactus' && selectedValues.contact && <ContactCard login={login} handleSubmit={handleSubmit} />
                 }
             </div>
         </div>
@@ -168,7 +191,7 @@ const OptionDiv = ({ handleToggle, handleSubmit, selectedIcon, setSelectedIcon, 
 }
 
 const EachOptioin = ({ text, icon, IconName, selectedIcon, setSelectedIcon, }) => {
-
+    const { selectedValues } = useContext(SelectedValuesContext);
 
     return (
         <div onClick={() => { setSelectedIcon(IconName) }} key={text} className={`flex justify-center items-center font-poppins rounded-md `}>

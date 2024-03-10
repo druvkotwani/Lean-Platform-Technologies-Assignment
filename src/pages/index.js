@@ -3,45 +3,22 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import Hero from "@/components/Hero/Hero";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useContext } from 'react';
+import { SelectedValuesContext } from "@/context/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [selectedValues, setSelectedValues] = useState({
-    issue: false,
-    feedback: false,
-    suggestion: false,
-    contact: false
-  });
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    setSelectedValues({
-      ...selectedValues,
-      [name]: checked
-    });
-  };
+  const { selectedValues, handleCheckboxChange } = useContext(SelectedValuesContext);
 
-  const handleButtonClick = () => {
-    console.log('Selected values:', selectedValues);
-  };
+
   return (
     <>
       <Navbar />
-      <div className="flex gap-2 sm:gap-6 justify-center items-center mt-6 font-poppins">
-        <Link href='/login' className="bg-blue-500 text-lg  hover:bg-blue-700 flex flex-col text-center text-white font-bold py-2 px-4 rounded">
-          Login
-          <span className=" text-sm  text-[#cecece] "> with all components </span>
-        </Link>
-        <Link href='/withoutlogin' className="bg-blue-500 text-lg  hover:bg-blue-700 flex flex-col text-center text-white font-bold py-2 px-4 rounded">
-          WithoutLogin
-          <span className=" text-sm text-[#cecece] "> with all components </span>
-        </Link>
 
-      </div>
 
-      <div className="flex  gap-6 justify-center items-center mt-6 font-poppins border-t py-4 ">
+      <div className="flex  gap-6 justify-center items-center  font-poppins  py-4 ">
 
         <div className="flex flex-col items-center py-4 px-6 rounded-xl justify-center bg-teal-500  mx-2 sm:mx-0 text-white">
           <h1 className="text-2xl font-bold px-2">Select components</h1>
@@ -50,7 +27,7 @@ export default function Home() {
               <input
                 type="checkbox"
                 name="issue"
-                checked={selectedValues.value1}
+                checked={selectedValues.issue}
                 onChange={handleCheckboxChange}
               />
               <span className="ml-1">Report an Issue</span>
@@ -60,7 +37,7 @@ export default function Home() {
               <input
                 type="checkbox"
                 name="feedback"
-                checked={selectedValues.value2}
+                checked={selectedValues.feedback}
                 onChange={handleCheckboxChange}
               />
               <span className="ml-1">Share Feedback</span>
@@ -70,7 +47,7 @@ export default function Home() {
               <input
                 type="checkbox"
                 name="suggestion"
-                checked={selectedValues.value3}
+                checked={selectedValues.suggestion}
                 onChange={handleCheckboxChange}
               />
               <span className="ml-1">Give suggestion</span>
@@ -80,7 +57,7 @@ export default function Home() {
               <input
                 type="checkbox"
                 name="contact"
-                checked={selectedValues.value4}
+                checked={selectedValues.contact}
                 onChange={handleCheckboxChange}
               />
               <span className="ml-1">Contact Us</span>
@@ -92,14 +69,12 @@ export default function Home() {
           </p>
 
           <div className="flex  gap-4 items-start justify-center mt-2">
-            <Link onClick={handleButtonClick} href='/login' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Login  </Link>
+            <Link href='/login' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Login  </Link>
             <Link href='/withoutlogin' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">WithoutLogin </Link>
           </div>
         </div>
 
       </div>
-
-
 
       <footer className="fixed bottom-0 footer w-full flex items-center justify-center p-4 bg-base-100  border-t-2 font-poppins">
         <aside className="items-center grid-flow-col">
