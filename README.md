@@ -45,5 +45,4 @@ npm run dev
 
 <hr/>
 
-## This project is the assignment to us given by Mehar Kaila[WordleCup.io].
 ## Drop a ⭐ if you like this project.
